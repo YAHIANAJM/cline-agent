@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package cline;
+
+service ClineCore {
+  rpc SendMessage (ClineRequest) returns (ClineResponse) {}
+}
+
+message ClineRequest {
+  string text = 1;
+}
+
+message ClineResponse {
+  string reply = 1;
+  string text = 2;
+}
