@@ -15,12 +15,13 @@ export function createAgent() {
 }
 
 // Send message to Cline CLI for a specific agent
+// Send message to Cline CLI for a specific agent
+// Send message to Cline CLI for a specific agent
 export async function sendMessage(id, message) {
   const agent = agents[id];
   if (!agent) throw new Error("Agent not found");
 
   return new Promise((resolve, reject) => {
-    // Spawn cline subprocess in non-interactive mode
     const cline = spawn("cline", ["--no-interactive"]);
 
     let output = "";
@@ -39,19 +40,28 @@ export async function sendMessage(id, message) {
         console.error(`[Agent ${id}] Cline error:`, errorOutput);
         reject(new Error(errorOutput || `Cline exited with code ${code}`));
       } else {
-        // Clean the output and return it
-        const reply = output.trim();
+        // Remove ANSI color codes
+        const cleanOutput = output.replace(/\u001b\[[0-9;]*m/g, "");
+
+        // Strictly extract "### Task completed" section
+        const match = cleanOutput.match(/### Task completed\s*([\s\S]*?)(?=\n###|$)/);
+
+        const finalReply = match ? match[1].trim() : "No 'Task completed' message found.";
+
         console.log(`[Agent ${id}] Message: ${message}`);
-        console.log(`[Agent ${id}] Reply: ${reply}`);
-        resolve(reply);
+        console.log(`[Agent ${id}] Reply: ${finalReply}`);
+
+        resolve(finalReply);
       }
     });
 
-    // Send the message to Cline
+    // Send message to Cline
     cline.stdin.write(message + "\n");
     cline.stdin.end();
   });
 }
+
+
 
 // Get all agent IDs
 export function getAgents() {
