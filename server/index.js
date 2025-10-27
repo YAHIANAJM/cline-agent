@@ -35,5 +35,6 @@ app.post("/api/agents/:id/message", async (req, res) => {
 });
 
 app.listen(PORT, () => {
+  console.log("🚀 Starting MCP Bridge Server...");
   console.log(`✅ MCP Bridge Server running on http://localhost:${PORT}`);
 });

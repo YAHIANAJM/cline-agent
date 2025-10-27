@@ -1,0 +1,65 @@
+.agent-chat {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  max-width: 1200px;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+}
+
+.chat-header {
+  padding: 1rem;
+  background-color: #3a3a3a;
+  font-weight: bold;
+  border-bottom: 1px solid #444;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.chat-message {
+  max-width: 70%;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  word-break: break-word;
+}
+
+.chat-message.user {
+  align-self: flex-end;
+  background-color: #646cff;
+  color: #000;
+}
+
+.chat-message.cline {
+  align-self: flex-start;
+  background-color: #444;
+}
+
+.chat-input-form {
+  display: flex;
+  padding: 0.5rem;
+  border-top: 1px solid #444;
+}
+
+.chat-input-form input {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+}
+
+.chat-input-form button {
+  margin-left: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
